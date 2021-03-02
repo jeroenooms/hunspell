@@ -119,6 +119,8 @@ public:
   Rcpp::CharacterVector stem(Rcpp::String word){
     Rcpp::CharacterVector out;
     char * str = string_from_r(word);
+    if (!str)
+      return out;
     std::vector<std::string> x = pMS_->stem(str);
     for (size_t i = 0; i < x.size(); i++) {
       out.push_back(string_to_r(x.at(i).c_str()));
